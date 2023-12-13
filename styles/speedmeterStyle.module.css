@@ -1,0 +1,167 @@
+.container {
+    text-align: center;
+    margin-top: 50px;
+
+  }
+
+  .speedometer {
+    
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #FFFFFF 0%,
+      #FFFFFf  5%,
+      #FC7336 50%,
+      #FC601E  75%,
+      #FC5006 100%
+    );
+    position: relative;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  .speedometer1{
+     width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: white;
+  }
+  .needle {
+    width: 2px;
+    height: 80px;
+    background-color: black;
+    position: absolute;
+    top: calc(50% - 80px);
+    left: calc(50% - 1px);
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(0deg);
+    transition: transform 1s ease-in-out;
+    z-index: 1;
+  }
+
+  .score {
+    z-index: 2;
+    font-size: 30px;
+  }
+
+  /* Loading animation */
+  @keyframes rotate {
+    0% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    100% {
+      transform: translateX(-50%) rotate(360deg);
+    }
+  }
+
+  .loading .needle {
+    animation: rotate 2s infinite linear;
+  }
+  
+  .button {
+        width: 100px;
+  padding: 8px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  font-size: medium;
+  font-weight: bold;
+  color: white;
+  border-radius: 2rem;
+  background: #FC5006;
+  border: none;
+  margin-top: 15px;
+  box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+     margin-bottom: 30px;
+  }
+  .button:hover{
+  background: #EFF6FF;
+  color: #FC5006;
+  box-shadow: inset 1px 4px 6px 0px rgba(0, 0, 0, 0.3);
+   
+}
+  .searchInput{
+  background: #EFF6FF;
+  width: 250px;
+    padding: 10px;
+  border: 1px solid #EFF6FF;
+  border-radius: 2rem;
+  border: 1px solid #dadada;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  gap: 5px;
+  font-weight: bold;
+  color: #adadad;
+  box-shadow: inset 1px 4px 6px 0px rgba(0, 0, 0, 0.3);
+  }    
+  .header{
+    color: #FC5006;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .speedometer {
+      width: 120px;
+      height: 120px;
+      font-size: 20px;
+    }
+
+    .speedometer1 {
+      width: 90px;
+      height: 90px;
+    }
+
+    .score {
+      font-size: 20px;
+    }
+
+    .button {
+      width: 80px;
+      font-size: small;
+      padding: 6px;
+    }
+
+    #searchInput {
+      width: 200px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .speedometer {
+      width: 100px;
+      height: 100px;
+      font-size: 16px;
+    }
+
+    .speedometer1 {
+      width: 70px;
+      height: 70px;
+    }
+
+    .score {
+      font-size: 18px;
+    }
+
+    .button {
+      width: 70px;
+      font-size: x-small;
+      padding: 5px;
+    }
+
+    #searchInput {
+      width: 180px;
+      font-size: 12px;
+    }
+  }
