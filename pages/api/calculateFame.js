@@ -16,9 +16,9 @@ async function searchPersonOnPlatforms(personName, apiKey) {
     `site:crunchbase.com ${personName}`, // Search on Crunchbase
     `site:imdb.com ${personName}`, // Search on IMDb
     `site:google.com knowledge panel ${personName}`, // Search on Google Knowledge Panel
-    `site:news.google.com ${personName}`, // Search on Google News
-    `site:en.wikipedia.org ${personName}`, // Search on Wikipedia
-    `site:wikinews.org ${personName}`, // Search on Wikinews
+    `site:news.google.com ${personName} location:${location}`, // Search on Google News
+    `site:en.wikipedia.org ${personName} location:${location}`, // Search on Wikipedia
+    `site:wikinews.org ${personName} location:${location}`, // Search on Wikinews
     // Add more sites/platforms to search here
   ];
 

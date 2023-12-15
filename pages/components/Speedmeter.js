@@ -43,6 +43,8 @@ export default function SpeedometerPage() {
       <div className={styles.header}>
         <h1>Fame checker</h1>
       </div>
+
+      <div className={styles.inputBox}>
       <form onSubmit={checkScore}>
         <input
           type="text"
@@ -56,6 +58,8 @@ export default function SpeedometerPage() {
           Check
         </button>
       </form>
+
+      </div>
 
       <div className={styles.speedometer + (loading ? ` ${styles.loading}` : '')}>
         <div className={styles.speedometer1}>
