@@ -11,14 +11,14 @@ const weights = {
   weight_wikinews: 0.3,
 };
 
-async function searchPersonOnPlatforms(personName, apiKey) {
+async function searchPersonOnPlatforms(fullName,selectedCountry,birthDate,apiKey) {
   const searchQueries = [
-    `site:crunchbase.com ${personName}`, // Search on Crunchbase
-    `site:imdb.com ${personName}`, // Search on IMDb
-    `site:google.com knowledge panel ${personName}`, // Search on Google Knowledge Panel
-    `site:news.google.com ${personName} location:${location}`, // Search on Google News
-    `site:en.wikipedia.org ${personName} location:${location}`, // Search on Wikipedia
-    `site:wikinews.org ${personName} location:${location}`, // Search on Wikinews
+    `site:crunchbase.com ${fullName}`, // Search on Crunchbase
+    `site:imdb.com ${fullName}`, // Search on IMDb
+    `site:google.com knowledge panel ${fullName}`, // Search on Google Knowledge Panel
+    `site:news.google.com ${fullName} location:${selectedCountry}`, // Search on Google News
+    `site:wikipedia.org ${fullName} location:${selectedCountry} ${birthDate}`, // Search on Wikipedia
+    `site:wikinews.org ${fullName} location:${selectedCountry}`, // Search on Wikinews
     // Add more sites/platforms to search here
   ];
 
@@ -49,11 +49,12 @@ async function searchPersonOnPlatforms(personName, apiKey) {
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { fullName /* Add other parameters */ } = req.body;
-    const apiKey = '4cff6d10baedb60f0bac24fcc4f30cd8264910a361edf74dbd32e949d33aa4dd'; // Replace with your actual SERP API key
+    const { fullName,selectedCountry,socialInput,
+		webInput,birthDate} = req.body;
+    const apiKey = 'bd5ff3f938e1f1581f1379fc2b6181dd601278663263bba997b6f73e711d9ef0'; // Replace with your actual SERP API key
 
     try {
-      const presenceIndicators = await searchPersonOnPlatforms(fullName, apiKey);
+      const presenceIndicators = await searchPersonOnPlatforms(fullName,selectedCountry,birthDate, apiKey);
       const presenceValues = Object.values(presenceIndicators);
 
       // Calculate fame score based on presence indicators (1 for presence, 0 for absence)
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
         0
       ))*100;
 
-      res.status(200).json({ fameScore, presenceIndicators });
+      res.status(200).json({ fameScore, presenceIndicators,  });
 
     } catch (error) {
       console.error('Error processing request:', error);
