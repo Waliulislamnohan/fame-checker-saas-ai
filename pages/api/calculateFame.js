@@ -51,7 +51,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { fullName,selectedCountry,socialInput,
 		webInput,birthDate} = req.body;
-    const apiKey = 'bd5ff3f938e1f1581f1379fc2b6181dd601278663263bba997b6f73e711d9ef0'; // Replace with your actual SERP API key
+		const apiKey = 'd25d81e75ba8e31ea867dffdadbcae549fb2a6dc2b94cd8aacd7ae3476a0f49f';
 
     try {
       const presenceIndicators = await searchPersonOnPlatforms(fullName,selectedCountry,birthDate, apiKey);

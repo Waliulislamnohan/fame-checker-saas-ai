@@ -21,3 +21,32 @@
       border-color: #0066FF; /* Change to the color you desire */
       box-shadow: 10px 11px 17px 0px rgba(0, 0, 0, 0.3);
   }
+
+  .followerDiv{
+    width: 188px;
+    height: 30px;
+    border-radius: 5rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #FC5006;
+  }
+
+  .snippetDiv{
+    text-align: center;
+    width: 300px;
+  }
+
+  .thumbnailContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 28px;
+    padding-bottom: 30px;
+  }
+
+  .thumbnailContainer > img {
+    border-radius: 5rem;
+    border: 5px solid #FC5006;
+  }
