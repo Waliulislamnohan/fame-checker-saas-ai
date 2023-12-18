@@ -9,7 +9,7 @@ const SearchResults = ({ fullName, selectedCountry, socialInput }) => {
   useEffect(() => {
     let isMounted = true; // Flag to check if the component is mounted
 
-    const apiKey = 'd25d81e75ba8e31ea867dffdadbcae549fb2a6dc2b94cd8aacd7ae3476a0f49f';
+    const apiKey = process.env.API_KEY;
     const fetchData = async () => {
       try {
         const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';

@@ -51,7 +51,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { fullName,selectedCountry,socialInput,
 		webInput,birthDate} = req.body;
-		const apiKey = 'd25d81e75ba8e31ea867dffdadbcae549fb2a6dc2b94cd8aacd7ae3476a0f49f';
+		const apiKey = process.env.API_KEY;
 
     try {
       const presenceIndicators = await searchPersonOnPlatforms(fullName,selectedCountry,birthDate, apiKey);

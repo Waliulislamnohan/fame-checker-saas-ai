@@ -202,3 +202,45 @@
       font-size: 12px;
     }
   }
+
+
+
+
+  /* Add these CSS classes to your stylesheet */
+
+/* Skeleton loading effect */
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.skeletonCircle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-bottom: 20px;
+}
+
+.skeletonScore {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+}
+
+/* Confetti effect (using react-confetti library) */
+.react-confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+
+.status {
+  color: #FB5611;
+  font-size: xx-large;
+  font-weight: bold;
+}
