@@ -16,6 +16,7 @@ const SearchResults = ({ fullName, selectedCountry, socialInput }) => {
         const apiUrl = `https://serpapi.com/search?q=${fullName}+${selectedCountry}+${socialInput}&api_key=${apiKey}`;
         const response = await fetch(corsAnywhereUrl + apiUrl);
 
+      
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
