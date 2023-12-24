@@ -9,8 +9,9 @@ const SearchResults = ({ fullName, selectedCountry, socialInput }) => {
   useEffect(() => {
     let isMounted = true; // Flag to check if the component is mounted
 
-    const apiKey = process.env.API_KEY;
+    
     const fetchData = async () => {
+      const apiKey = process.env.API_KEY;
       try {
         const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
         const apiUrl = `https://serpapi.com/search?q=${fullName}+${selectedCountry}+${socialInput}&api_key=${apiKey}`;
@@ -20,7 +21,7 @@ const SearchResults = ({ fullName, selectedCountry, socialInput }) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
+        const inlineImages = data.inline_images
         const data = await response.json();
 
         const organicResults = data.organic_results;
