@@ -1,0 +1,75 @@
+import axios from 'axios';
+
+// Algorithm weights
+const weights = {
+  weight_crunchbase_com: 0.1,
+  weight_imdb: 0.1,
+  weight_google_points: 0.2,
+  weight_wikipedia: 0.3,
+  weight_wikinews: 0.3,
+};
+
+async function searchPersonOnPlatforms(fullName, selectedCountry, birthDate, apiKey) {
+  const searchQueries = [
+    `site:crunchbase.com ${fullName}`, // Search on Crunchbase
+    `site:imdb.com ${fullName}`, // Search on IMDb
+    `site:google.com knowledge panel ${fullName}`, // Search on Google Knowledge Panel
+    `site:news.google.com ${fullName} location:${selectedCountry}`, // Search on Google News
+    `site:wikipedia.org ${fullName} location:${selectedCountry} ${birthDate}`, // Search on Wikipedia
+    `site:wikinews.org ${fullName} location:${selectedCountry}`, // Search on Wikinews
+    // Add more sites/platforms to search here
+  ];
+
+  const results = {};
+
+  for (const query of searchQueries) {
+    try {
+      const response = await axios.post('https://real-time-web-search.p.rapidapi.com/search', {
+        queries: [query],
+        limit: '10',
+      }, {
+        headers: {
+          'content-type': 'application/json',
+          'X-RapidAPI-Key': apiKey, // Set your RapidAPI key here
+          'X-RapidAPI-Host': 'real-time-web-search.p.rapidapi.com',
+        },
+      });
+
+      const searchResults = response.data; // Modify this according to the response structure
+      results[query] = searchResults.length > 0 ? 1 : 0;
+      console.log(results[query]);
+    } catch (error) {
+      console.error('Error processing query:', query, error);
+      results[query] = 0; // Error indicator
+    }
+  }
+
+  return results;
+}
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { fullName, selectedCountry, birthDate } = req.body;
+    const apiKey = process.env.RapidAPI_Key; // Set your API key here
+
+    try {
+      const presenceIndicators = await searchPersonOnPlatforms(fullName, selectedCountry, birthDate, apiKey);
+      const presenceValues = Object.values(presenceIndicators);
+
+      const weightsArray = Object.values(weights);
+
+      const fameScore = presenceValues.reduce(
+        (acc, val, index) => acc + (weightsArray[index] || 0) * val,
+        0
+      ) * 100;
+
+      res.status(200).json({ fameScore, presenceIndicators });
+
+    } catch (error) {
+      console.error('Error processing request:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  } else {
+    res.status(405).json({ error: 'Method Not Allowed' });
+  }
+}
